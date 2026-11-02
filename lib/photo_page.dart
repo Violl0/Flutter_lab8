@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 enum PhotoType { dog, landscapes }
 
@@ -18,6 +17,12 @@ class _PhotoPageState extends State<PhotoPage> {
   String? _errorMessage;
   PhotoType _animalType = PhotoType.dog;
 
+  final List<String> _localPhotos = [
+    'assets/images/photo1.jpg',
+    'assets/images/photo2.jpg',
+    'assets/images/photo3.jpg',
+  ];
+
   Future<void> _fetchPhoto() async {
     setState(() {
       _isLoading = true;
@@ -25,21 +30,16 @@ class _PhotoPageState extends State<PhotoPage> {
       _imageUrl = null;
     });
 
-    try {
-      String url;
-      http.Response response;
 
-      if (_animalType == PhotoType.dog) {
-        url = 'https://dog.ceo/api/breeds/image/random';
-        response = await http.get(Uri.parse(url));
-        Map<String, dynamic> data = jsonDecode(response.body);
-        _imageUrl = data['message'];
-      } else {
-        final random = DateTime.now().millisecondsSinceEpoch;
-        _imageUrl = 'https://picsum.photos/seed/$random/800/800';
-      }
+    try {
+
+      await Future.delayed(const Duration(seconds: 2));
+      
+
+      final randomIndex = DateTime.now().millisecondsSinceEpoch % _localPhotos.length;
+      _imageUrl = _localPhotos[randomIndex];
     } catch (e) {
-      _errorMessage = 'Не удалось загрузить фото.\nПроверьте подключение к интернету.';
+      _errorMessage = 'Ошибка загрузки фото';
     }
 
     setState(() {
@@ -134,7 +134,8 @@ class _PhotoPageState extends State<PhotoPage> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(16),
-            child: Image.network(
+            // 3. Image.network ЗАМЕНЕН НА Image.asset
+            child: Image.asset(
               _imageUrl!,
               fit: BoxFit.cover,
               width: double.infinity,

@@ -1,17 +1,31 @@
-# flutter_lab8
+# Фото дня
 
-A new Flutter project.
+Приложение на Flutter, которое показывает случайные фото собак и пейзажей по нажатию кнопки.
 
-## Getting Started
+**Автор:** Каторжин Максим,  группа ИСП-241  
 
-This project is a starting point for a Flutter application.
+## Стек
+Flutter 3, Dart 3, Web (Chrome), пакет http.
 
-A few resources to get you started if this is your first Flutter project:
+## Скриншот
+![Скрин](img/2)
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Как запустить
+1. `git clone <ссылка>`
+2. `cd flutter_lab8`
+3. `flutter pub get`
+4. `flutter run -d chrome`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Что изучили
+- Как работает Future
+- Ключевые слова async и await
+- Обработка ошибок через try/catch
+- Запросы к серверу через http
+- Виджет загрузки CircularProgressIndicator
+
+## Ответы на вопросы
+1. Future это обещание вернуть данные позже. Обычное значение есть сразу, а Future потом.
+2. Await ждет ответа. Весь поток не блокирует.
+3. Первый раз чтобы включить загрузку, второй раз чтобы ее выключить.
+4. Без скобок передается ссылка на функцию, чтобы она сработала при нажатии.
+5. Network грузит из интернета, asset из папки проекта.
